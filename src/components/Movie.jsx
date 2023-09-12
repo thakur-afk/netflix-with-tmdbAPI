@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { FetchApi } from "./fetchapi";
 import Card from "./Card";
+import { useLoaderData } from "react-router-dom";
 
 const Movie = () => {
-  const [rows, setRows] = useState([]);
-  useEffect(() => {
-    async function fetchdata() {
-      let response = await FetchApi("popular")
-        .then((res) => res.json())
-        .then((res) => setRows(res.results));
-    }
-    fetchdata();
-  }, []);
+  // const [rows, setRows] = useState([]);
+  // useEffect(() => {
+  //   async function fetchdata() {
+  //     let response = await FetchApi("popular")
+  //       .then((res) => res.json())
+  //       .then((res) => setRows(res.results));
+  //   }
+  //   fetchdata();
+  // }, []);
+  const rows = useLoaderData();
   return (
     <div className="p-10 bg-black min-h-[90vh]">
       <div className="text-center">
@@ -27,3 +29,10 @@ const Movie = () => {
 };
 
 export default Movie;
+export async function FetchMovie() {
+  console.log("working");
+  let response = await FetchApi("popular")
+    .then((res) => res.json())
+    .then((res) => res.results);
+  return response;
+}

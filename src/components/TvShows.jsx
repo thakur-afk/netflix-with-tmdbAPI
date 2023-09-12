@@ -4,15 +4,7 @@ import { useLoaderData } from "react-router-dom";
 import Card from "./Card";
 
 const TvShows = () => {
-  const [rows, setRows] = useState([]);
-  useEffect(() => {
-    async function fetchdata() {
-      let response = await FetchApi("tv")
-        .then((res) => res.json())
-        .then((res) => setRows(res.results));
-    }
-    fetchdata();
-  }, []);
+  const rows = useLoaderData();
   return (
     <div className="p-10 bg-black min-h-[90vh]">
       <div>
